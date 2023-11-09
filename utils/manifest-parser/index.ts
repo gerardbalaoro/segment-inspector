@@ -1,4 +1,9 @@
-type Manifest = chrome.runtime.ManifestV3;
+export interface Manifest extends chrome.runtime.ManifestV3 {
+  icon: {
+    source: string;
+    sizes: number[];
+  };
+}
 
 class ManifestParser {
   // eslint-disable-next-line @typescript-eslint/no-empty-function

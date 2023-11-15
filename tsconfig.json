@@ -20,6 +20,7 @@
       "@root/*": ["./*"],
       "@src/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "virtual:reload-on-update-in-background-script": ["./src/global.d.ts"],
       "virtual:reload-on-update-in-view": ["./src/global.d.ts"]

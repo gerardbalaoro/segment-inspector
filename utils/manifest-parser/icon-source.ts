@@ -1,4 +1,4 @@
-import { resolve, relative } from 'path';
+import { relative, resolve } from 'path';
 import sharp from 'sharp';
 
 export type Icon = {

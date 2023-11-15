@@ -1,11 +1,11 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path, { resolve } from 'path';
-import makeManifest from './utils/plugins/make-manifest';
-import customDynamicImport from './utils/plugins/custom-dynamic-import';
-import addHmr from './utils/plugins/add-hmr';
-import watchRebuild from './utils/plugins/watch-rebuild';
+import { defineConfig } from 'vite';
 import manifest from './manifest';
+import addHmr from './utils/plugins/add-hmr';
+import customDynamicImport from './utils/plugins/custom-dynamic-import';
+import makeManifest from './utils/plugins/make-manifest';
+import watchRebuild from './utils/plugins/watch-rebuild';
 
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, 'src');
@@ -26,6 +26,7 @@ export default defineConfig({
       '@root': rootDir,
       '@src': srcDir,
       '@assets': assetsDir,
+      '@components': resolve(srcDir, 'components'),
       '@pages': pagesDir,
     },
   },
@@ -51,12 +52,6 @@ export default defineConfig({
       input: {
         devtools: resolve(pagesDir, 'devtools', 'index.html'),
         panel: resolve(pagesDir, 'panel', 'index.html'),
-        content: resolve(pagesDir, 'content', 'index.ts'),
-        background: resolve(pagesDir, 'background', 'index.ts'),
-        contentStyle: resolve(pagesDir, 'content', 'style.scss'),
-        popup: resolve(pagesDir, 'popup', 'index.html'),
-        newtab: resolve(pagesDir, 'newtab', 'index.html'),
-        options: resolve(pagesDir, 'options', 'index.html'),
       },
       output: {
         entryFileNames: 'src/pages/[name]/index.js',

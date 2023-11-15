@@ -1,19 +1,22 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import type { PluginOption } from 'vite';
 import colorLog from '../log';
 import ManifestParser, { Manifest } from '../manifest-parser';
 import IconSource from '../manifest-parser/icon-source';
-import type { PluginOption } from 'vite';
 
 const { resolve } = path;
 
 const rootDir = resolve(__dirname, '..', '..');
 const distDir = resolve(rootDir, 'dist');
-const publicDir = resolve(rootDir, 'public');
 
 export default function makeManifest(
   manifest: Manifest,
-  config: { isDev: boolean; contentScriptCssKey?: string; icon?: Manifest['icon'] },
+  config: {
+    isDev: boolean;
+    contentScriptCssKey?: string;
+    icon?: Manifest['icon'];
+  },
 ): PluginOption {
   async function makeManifest(to: string) {
     if (!fs.existsSync(to)) {
@@ -25,6 +28,9 @@ export default function makeManifest(
     // Naming change for cache invalidation
     if (config.contentScriptCssKey) {
       manifest.content_scripts.forEach(script => {
+        if (!Array.isArray(script.css)) {
+          script.css = [];
+        }
         script.css = script.css.map(css => css.replace('<KEY>', config.contentScriptCssKey));
       });
     }
@@ -57,15 +63,10 @@ export default function makeManifest(
   return {
     name: 'make-manifest',
     buildStart() {
-      if (config.isDev) {
-        makeManifest(distDir);
-      }
+      // makeManifest(distDir);
     },
     buildEnd() {
-      if (config.isDev) {
-        return;
-      }
-      makeManifest(publicDir);
+      makeManifest(distDir);
     },
   };
 }

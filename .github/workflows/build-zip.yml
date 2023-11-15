@@ -1,4 +1,4 @@
-name: Build And Upload Extension Zip Via Artifact
+name: Build and Upload
 
 on:
   push:
@@ -31,4 +31,5 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
+          name: segment-inspector-${{ github.ref_name }}
           path: dist/*

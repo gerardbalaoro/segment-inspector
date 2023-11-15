@@ -13,33 +13,35 @@ A browser extension for debugging Twilio Segment events
 
 </div>
 
-## Development
-
-1. Clone this repository.
-2. Change `name` and `description` in package.json => **Auto synchronize with manifest**
-3. Install pnpm globally: `npm install -g pnpm` (check your node version >= 16.6, recommended >= 18)
-4. Run `pnpm install` 
-
 ## Installation
 
-### For Chrome
+1. Download the [latest release](https://github.com/gerardbalaoro/segment-inspector/releases/latest).
+2. Extract the **zip** archive to your disk.
+3. Install the unpackaged extension.
+    - **Chrome / Edge / Chromium:**
+        - Go to `chrome://extensions`.
+        - Enable **Developer Mode**.
+        - Click **Load Unpacked** and navigate to where you extracted the **zip** archive.
 
-1. Run:
-    - Dev: `pnpm dev` or `npm run dev`
-    - Prod: `pnpm build` or `npm run build`
-2. Open in browser - `chrome://extensions`
-3. Check - `Developer mode`
-4. Find and Click - `Load unpacked extension`
-5. Select - `dist` folder
+## Development
 
-### For Firefox
+This project uses `pnpm` as a package manager. 
+You may install it globally using `npm`.
 
-1. Run:
-    - Dev: `pnpm dev:firefox` or `npm run dev:firefox`
-    - Prod: `pnpm build:firefox` or `npm run build:firefox`
-2. Open in browser - `about:debugging#/runtime/this-firefox`
-3. Find and Click - `Load Temporary Add-on...`
-4. Select - `manifest.json` from `dist` folder
+```sh
+npm install -g pnpm
+```
 
-> Remember in firefox you add plugin in temporary mode, that's mean it's disappear after close browser, you must do it again, on next launch.
+1. Install project dependencies.
+    ```
+    pnpm install
+    ```
+2. Create a development build and install it on your browser.
+   Hot module replacement is enabled and the project will rebuild
+   on any changes.
+    ```
+    pnpm run dev
+    ```
+   If you modified the manifest configuration file.
+   Please re-run the command and reload the extension.
 

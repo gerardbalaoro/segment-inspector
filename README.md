@@ -6,10 +6,10 @@
 ![](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![](https://img.shields.io/badge/Typescript-3178C6?style=flat-round&logo=typescript&logoColor=white)
 ![](https://img.shields.io/badge/Vite-646CFF?style=flat-round&logo=vite&logoColor=white)
-![GitHub action badge](https://github.com/gerardbalaoro/segment-inspector/actions/workflows/build-zip.yml/badge.svg)
+![GitHub action badge](https://github.com/gerardbalaoro/segment-inspector/actions/workflows/build.yml/badge.svg)
 
 
-> A browser extension for debugging Twilio Segment events
+A browser extension for debugging Twilio Segment events
 
 </div>
 

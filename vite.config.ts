@@ -1,4 +1,6 @@
 import react from '@vitejs/plugin-react';
+import jotaiDebugLabel from 'jotai/babel/plugin-debug-label';
+import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh';
 import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
 import manifest from './manifest';
@@ -7,15 +9,16 @@ import customDynamicImport from './utils/plugins/custom-dynamic-import';
 import makeManifest from './utils/plugins/make-manifest';
 import watchRebuild from './utils/plugins/watch-rebuild';
 
+const isDev = process.env.__DEV__ === 'true';
+const isFirefox = process.env.__FIREFOX__ === 'true';
+const isProduction = !isDev;
+
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, 'src');
 const pagesDir = resolve(srcDir, 'pages');
 const assetsDir = resolve(srcDir, 'assets');
-const outDir = resolve(rootDir, 'dist');
+const outDir = resolve(rootDir, 'dist', isFirefox ? 'firefox' : 'chrome');
 const publicDir = resolve(rootDir, 'public');
-
-const isDev = process.env.__DEV__ === 'true';
-const isProduction = !isDev;
 
 // ENABLE HMR IN BACKGROUND SCRIPT
 const enableHmrInBackgroundScript = true;
@@ -31,7 +34,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    react(),
+    react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
     makeManifest(manifest, {
       isDev,
       contentScriptCssKey: regenerateCacheInvalidationKey(),
@@ -50,6 +53,7 @@ export default defineConfig({
     reportCompressedSize: isProduction,
     rollupOptions: {
       input: {
+        background: resolve(pagesDir, 'background', 'index.ts'),
         devtools: resolve(pagesDir, 'devtools', 'index.html'),
         panel: resolve(pagesDir, 'panel', 'index.html'),
       },

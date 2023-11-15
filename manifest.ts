@@ -9,9 +9,14 @@ const manifest: Manifest = {
   name: 'Segment Inspector',
   version: packageJson.version,
   description: packageJson.description,
-  permissions: ['activeTab', 'webRequest', 'clipboardWrite', 'clipboardRead'],
+  permissions: ['activeTab', 'tabs', 'webRequest', 'clipboardWrite', 'clipboardRead'],
+  host_permissions: ['*://*/*'],
   action: {
     default_icon: 'icon-48.png',
+  },
+  background: {
+    service_worker: 'src/pages/background/index.js',
+    type: 'module',
   },
   icon: {
     source: 'src/assets/img/icon.svg',

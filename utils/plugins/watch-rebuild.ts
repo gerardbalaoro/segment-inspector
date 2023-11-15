@@ -1,16 +1,17 @@
 import { resolve } from 'path';
 import type { PluginOption } from 'vite';
 
-const rootDir = resolve(__dirname, '..', '..');
-const manifestFile = resolve(rootDir, 'manifest.ts');
-const viteConfigFile = resolve(rootDir, 'vite.config.ts');
-
 export default function watchRebuild(): PluginOption {
+  let root: string | null = null;
+
   return {
     name: 'watch-rebuild',
+    config(config) {
+      root = config.root || process.cwd();
+    },
     async buildStart() {
-      this.addWatchFile(manifestFile);
-      this.addWatchFile(viteConfigFile);
+      this.addWatchFile(resolve(root, 'manifest.ts'));
+      this.addWatchFile(resolve(root, 'vite.config.ts'));
     },
   };
 }

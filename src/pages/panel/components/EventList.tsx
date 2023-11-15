@@ -1,11 +1,13 @@
 import { ScrollArea } from '@components/ui/scroll-area';
-import { SegmentEvent } from '@src/shared/segment';
+import useEventStore from '@root/src/shared/hooks/useEventStore';
 import EventListItem from './EventListItem';
 
-export default function EventList({ events }: { events: SegmentEvent[] }) {
+export default function EventList() {
+  const { events } = useEventStore();
+
   return (
     <ScrollArea className="w-full h-full overflow-auto">
-      <ul className="flex h-full w-full flex-col">
+      <ul className="flex flex-col w-full h-full">
         {events.map(e => (
           <EventListItem key={e.id} event={e} />
         ))}

@@ -36,14 +36,14 @@ export default function useEventStore() {
     return event ?? null;
   }, [events, activeEvent]);
 
-  console.log(events);
-
   const add = (event: SegmentEvent) => {
-    const existing = events.find(e => e.id === event.id);
-
-    if (typeof existing === 'undefined') {
-      setEvents([event, ...events]);
-    }
+    setEvents(prevEvents => {
+      const existing = prevEvents.find(e => e.id === event.id);
+      if (typeof existing === 'undefined') {
+        return [event, ...prevEvents];
+      }
+      return prevEvents;
+    });
   };
 
   return {

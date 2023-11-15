@@ -1,14 +1,9 @@
 import * as fs from 'fs';
-import * as path from 'path';
+import { resolve } from 'path';
 import type { PluginOption } from 'vite';
 import colorLog from '../log';
 import ManifestParser, { Manifest } from '../manifest-parser';
 import IconSource from '../manifest-parser/icon-source';
-
-const { resolve } = path;
-
-const rootDir = resolve(__dirname, '..', '..');
-const distDir = resolve(rootDir, 'dist');
 
 export default function makeManifest(
   manifest: Manifest,
@@ -18,12 +13,15 @@ export default function makeManifest(
     icon?: Manifest['icon'];
   },
 ): PluginOption {
-  async function makeManifest(to: string) {
-    if (!fs.existsSync(to)) {
-      fs.mkdirSync(to);
+  let root: string | null = null;
+  let output: string | null = null;
+
+  async function generate() {
+    if (!fs.existsSync(output)) {
+      fs.mkdirSync(output, { recursive: true });
     }
 
-    const manifestPath = resolve(to, 'manifest.json');
+    const manifestPath = resolve(output, 'manifest.json');
 
     // Naming change for cache invalidation
     if (config.contentScriptCssKey) {
@@ -41,8 +39,8 @@ export default function makeManifest(
     }
 
     if (typeof config.icon !== 'undefined') {
-      const iconSource = new IconSource(resolve(rootDir, config.icon.source), config.icon.sizes);
-      const icons = await iconSource.generate(to, {
+      const iconSource = new IconSource(resolve(root, config.icon.source), config.icon.sizes);
+      const icons = await iconSource.generate(output, {
         desaturate: config.isDev,
       });
 
@@ -62,11 +60,12 @@ export default function makeManifest(
 
   return {
     name: 'make-manifest',
-    buildStart() {
-      // makeManifest(distDir);
+    config(config) {
+      root = config.root || process.cwd();
+      output = config.build.outDir;
     },
     buildEnd() {
-      makeManifest(distDir);
+      generate();
     },
   };
 }

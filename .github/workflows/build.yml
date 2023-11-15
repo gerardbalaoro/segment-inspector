@@ -28,9 +28,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build Project
         run: |
-          mkdir -p packages
           pnpm build
-          cd dist && zip -r ../packages/${{ env.PACKAGE_NAME}}.zip ./* && cd ..
+          pnpm zip
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.PACKAGE_NAME }}

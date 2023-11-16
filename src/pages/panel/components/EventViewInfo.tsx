@@ -1,9 +1,10 @@
+import { Button } from '@components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/ui/table';
-import { ClockIcon, MessageSquareIcon, TagIcon } from 'lucide-react';
+import { ClockIcon, CopyIcon, MessageSquareIcon, TagIcon } from 'lucide-react';
 import { When } from 'react-if';
 import { SegmentEvent } from '../../../shared/segment';
 
-import { cn } from '@src/shared/utils/ui';
+import { clipboard, cn } from '@src/shared/utils/ui';
 import { alphabetical, crush, listify, pick, title } from 'radash';
 
 class Info {
@@ -26,7 +27,7 @@ class Info {
 
   static List({ children, title }: React.HTMLAttributes<HTMLElement> & { title: string }) {
     return (
-      <Table className="flex flex-col border-none">
+      <Table className="flex flex-col overflow-hidden border-none">
         <TableHeader className="py-2 border rounded-t bg-slate-100 dark:bg-slate-800 dark:text-white dark:border-slate-500">
           <TableHead
             className={cn('flex h-auto items-center gap-4', 'text-xs font-semibold uppercase tracking-wide')}
@@ -42,17 +43,32 @@ class Info {
 
   static ListItem({ title, body }: { title: JSX.Element | string; body: unknown }) {
     return (
-      <TableRow className="flex flex-col w-full gap-0 p-2 px-4 sm:table-row sm:p-0 dark:border-slate-500">
+      <TableRow className="flex flex-col w-full gap-0 p-2 px-4 overflow-hidden lg:table-row lg:p-0 dark:border-slate-500">
         <TableCell
           className={cn(
-            'whitespace-nowrap p-0 text-xs font-medium text-primary-500 sm:text-current',
-            'sm:py-2 sm:px-4 sm:text-sm font-mono',
+            'whitespace-nowrap p-0 text-xs font-medium text-primary-500 lg:text-current',
+            'lg:py-2 lg:px-4 lg:text-md font-mono',
           )}
         >
           {title}
         </TableCell>
-        <TableCell className="w-full p-0 break-all sm:py-2 sm:px-4">
-          {body ? body.toString() : <code className="text-xs">null</code>}
+        <TableCell
+          className={cn('relative w-full p-0 break-all lg:py-2 lg:px-4', body && 'group hover:pr-8 lg:hover:pr-12')}
+        >
+          <div>{body ? body.toString() : <code className="text-xs">null</code>}</div>
+          <When condition={!!body}>
+            <div className="absolute top-0 bottom-0 right-0 items-center hidden h-full lg:mr-4 group-hover:flex">
+              <Button
+                variant="ghost"
+                size="icon"
+                title="Copy"
+                className="w-6 h-6 text-primary-500 hover:text-primary-500 hover:bg-primary-100"
+                onClick={() => clipboard(body.toString())}
+              >
+                <CopyIcon className="w-3 h-3" />
+              </Button>
+            </div>
+          </When>
         </TableCell>
       </TableRow>
     );

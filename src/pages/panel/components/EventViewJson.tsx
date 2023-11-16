@@ -1,4 +1,4 @@
-import { cn } from '@src/shared/utils/ui';
+import { clipboard, cn } from '@src/shared/utils/ui';
 import JsonView from '@uiw/react-json-view';
 import { ChevronDownIcon, CopyIcon } from 'lucide-react';
 import { SegmentEvent } from '../../../shared/segment';
@@ -65,16 +65,6 @@ const darkColors: Record<string, string> = {
 export default function EventViewJson({ event }: { event: SegmentEvent }) {
   const { isDarkMode } = useTheme();
 
-  const copy = value => {
-    if (typeof document === 'undefined') return;
-    const textarea = document.createElement('textarea');
-    textarea.textContent = JSON.stringify(value);
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-  };
-
   return (
     <JsonView
       id="json-viewer"
@@ -87,13 +77,13 @@ export default function EventViewJson({ event }: { event: SegmentEvent }) {
       displayObjectSize={false}
     >
       <JsonView.Arrow>
-        <ChevronDownIcon className="h-4 w-4" />
+        <ChevronDownIcon className="w-4 h-4" />
       </JsonView.Arrow>
       <JsonView.Copied
         render={({ className, ...props }, { value }) => {
           const click: React.MouseEventHandler = e => {
             e.stopPropagation();
-            copy(value);
+            clipboard(value);
           };
           return (
             <button onClick={click}>

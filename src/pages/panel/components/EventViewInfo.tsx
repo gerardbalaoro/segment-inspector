@@ -102,7 +102,10 @@ export default function EventViewInfo({ event }: { event: SegmentEvent }) {
         />
       </Info.CompactList>
 
-      <Info.List title="Identity">
+      <Info.List title="Common">
+        <When condition={event.type === 'track'}>
+          <Info.ListItem title="Event" body={event.data.event} />
+        </When>
         <Info.ListItem title="Anonymous ID" body={event.anonymousId} />
         <Info.ListItem title="User ID" body={event.userId} />
         <When condition={event.type === 'alias'}>

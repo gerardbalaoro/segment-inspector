@@ -61,20 +61,20 @@ export const EventListItem: React.FC<Props> = ({ event }) => {
   return (
     <li
       className={cn(
-        'flex flex-shrink-0 cursor-pointer items-center justify-between gap-4 border-b p-4 text-sm overflow-hidden w-full',
+        'flex flex-shrink-0 cursor-pointer items-center justify-between gap-4 border-b px-4 py-3 text-sm overflow-hidden w-full',
         'hover:bg-slate-50 dark:border-slate-500 dark:hover:bg-slate-800',
         isActive && ['bg-primary-500 text-white hover:bg-primary-500', 'dark:bg-primary-600 dark:hover:bg-primary-600'],
       )}
       onClick={() => (isActive ? close() : open(event.id))}
     >
-      <p className="min-w-auto flex flex-grow-0 items-center gap-2 xs:min-w-20">
+      <p className="flex items-center flex-grow-0 gap-2 min-w-auto xs:min-w-20">
         <EventTypeIcon type={event.type} className="w-5 h-5" />
-        <span className="hidden text-xs font-medium uppercase tracking-wide xs:block">{event.type}</span>
+        <span className="hidden text-xs font-medium tracking-wide uppercase xs:block">{event.type}</span>
       </p>
-      <p className="truncate min-w-0">
+      <p className="min-w-0 truncate">
         <code className="font-mono font-semibold">{event.name}</code>
       </p>
-      <p className="hidden ml-auto mr-0 flex-shrink-0 whitespace-nowrap text-xs xs:block">{timestamp}</p>
+      <p className="flex-shrink-0 hidden ml-auto mr-0 text-xs whitespace-nowrap xs:block">{timestamp}</p>
     </li>
   );
 };

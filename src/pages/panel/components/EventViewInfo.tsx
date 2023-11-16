@@ -1,6 +1,5 @@
-// import { SegmentEvent } from '../lib/segment';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/ui/table';
-import { ClockIcon, FingerprintIcon, TagIcon } from 'lucide-react';
+import { ClockIcon, MessageSquareIcon, TagIcon } from 'lucide-react';
 import { When } from 'react-if';
 import { SegmentEvent } from '../../../shared/segment';
 
@@ -19,8 +18,8 @@ class Info {
   static CompactListItem({ title, body }: { title: JSX.Element | string; body: JSX.Element | string }) {
     return (
       <TableRow className="flex items-center border-none hover:bg-transparent">
-        <TableHead className="h-auto border-none pl-0">{title}</TableHead>
-        <TableRow className="break-all border-none pr-0 hover:bg-transparent">{body}</TableRow>
+        <TableHead className="h-auto pl-0 border-none">{title}</TableHead>
+        <TableRow className="pr-0 break-all border-none hover:bg-transparent">{body}</TableRow>
       </TableRow>
     );
   }
@@ -28,7 +27,7 @@ class Info {
   static List({ children, title }: React.HTMLAttributes<HTMLElement> & { title: string }) {
     return (
       <Table className="flex flex-col border-none">
-        <TableHeader className="rounded-t border bg-slate-100 py-2 dark:bg-slate-800 dark:text-white dark:border-slate-500">
+        <TableHeader className="py-2 border rounded-t bg-slate-100 dark:bg-slate-800 dark:text-white dark:border-slate-500">
           <TableHead
             className={cn('flex h-auto items-center gap-4', 'text-xs font-semibold uppercase tracking-wide')}
             colSpan={2}
@@ -36,23 +35,23 @@ class Info {
             {title}
           </TableHead>
         </TableHeader>
-        <TableBody className="rounded-b border dark:border-slate-500">{children}</TableBody>
+        <TableBody className="border rounded-b dark:border-slate-500">{children}</TableBody>
       </Table>
     );
   }
 
   static ListItem({ title, body }: { title: JSX.Element | string; body: unknown }) {
     return (
-      <TableRow className="flex w-full flex-col gap-0 p-2 sm:table-row sm:p-0 dark:border-slate-500">
+      <TableRow className="flex flex-col w-full gap-0 p-2 px-4 sm:table-row sm:p-0 dark:border-slate-500">
         <TableCell
           className={cn(
             'whitespace-nowrap p-0 text-xs font-medium text-primary-500 sm:text-current',
-            'sm:p-2 sm:text-sm font-mono',
+            'sm:py-2 sm:px-4 sm:text-sm font-mono',
           )}
         >
           {title}
         </TableCell>
-        <TableCell className="w-full break-all p-0 sm:p-2">
+        <TableCell className="w-full p-0 break-all sm:py-2 sm:px-4">
           {body ? body.toString() : <code className="text-xs">null</code>}
         </TableCell>
       </TableRow>
@@ -90,10 +89,10 @@ export default function EventViewInfo({ event }: { event: SegmentEvent }) {
   return (
     <div className="flex flex-col gap-4 p-4 text-sm">
       <Info.CompactList>
-        <Info.CompactListItem title={<TagIcon className="h-4 w-4" />} body={title(event.type)} />
-        <Info.CompactListItem title={<FingerprintIcon className="h-4 w-4" />} body={event.id} />
+        <Info.CompactListItem title={<TagIcon className="w-4 h-4" />} body={title(event.type)} />
+        <Info.CompactListItem title={<MessageSquareIcon className="w-4 h-4" />} body={event.id} />
         <Info.CompactListItem
-          title={<ClockIcon className="h-4 w-4" />}
+          title={<ClockIcon className="w-4 h-4" />}
           body={
             <>
               <span className="hidden xs:block">{event.timestamp.format('llll')}</span>

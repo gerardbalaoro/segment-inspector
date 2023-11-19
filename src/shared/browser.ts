@@ -4,12 +4,17 @@ type NetworkRequest = {
   url: string;
   method: string;
   body: string;
+  origin: number;
 };
 
 export const onRequest = (handler: (request: NetworkRequest) => void) => {
   console.log('Attaching message listener');
   runtime.onMessage.addListener((message: Record<string, unknown>) => {
     if (message.type !== 'request') {
+      return;
+    }
+
+    if (message.origin !== devtools.inspectedWindow.tabId) {
       return;
     }
 

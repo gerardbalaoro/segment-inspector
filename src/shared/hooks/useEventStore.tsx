@@ -1,31 +1,10 @@
 import { atom, useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import { useMemo } from 'react';
 import { SegmentEvent } from '../segment';
 
 const store = {
   active: atom<string | false>(false),
-  events: atomWithStorage<SegmentEvent[]>('events', [], {
-    getItem(key: string, initialValue: SegmentEvent[]) {
-      const json = localStorage.getItem(key);
-      try {
-        const events = JSON.parse(json ?? '');
-        if (!Array.isArray(events)) {
-          return initialValue;
-        }
-        return events.map(data => new SegmentEvent(data));
-      } catch {
-        return initialValue;
-      }
-    },
-    setItem(key: string, value: SegmentEvent[]) {
-      const data = value.map(event => event.data);
-      localStorage.setItem(key, JSON.stringify(data));
-    },
-    removeItem(key: string) {
-      localStorage.removeItem(key);
-    },
-  }),
+  events: atom<SegmentEvent[]>([]),
 };
 
 export default function useEventStore() {

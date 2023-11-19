@@ -1,6 +1,6 @@
 {
   "name": "segment-inspector",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A browser extension for debugging Twilio Segment events",
   "license": "MIT",
   "repository": {

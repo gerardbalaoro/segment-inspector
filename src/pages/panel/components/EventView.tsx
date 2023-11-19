@@ -6,17 +6,17 @@ import EventViewJson from './EventViewJson';
 
 export default function EventView({ event }: { event?: SegmentEvent }) {
   const pages = [
-    { id: 'info', title: 'Details', content: EventViewInfo },
-    { id: 'json', title: 'JSON', content: EventViewJson },
+    { id: 'info', title: 'Overview', content: EventViewInfo },
+    { id: 'json', title: 'Raw', content: EventViewJson },
   ];
 
   if (!event) {
-    return <>No Event Selected</>;
+    return <div className="flex items-center justify-center w-full h-full">No Event Selected</div>;
   }
 
   return (
-    <Tabs defaultValue={pages[0]?.id} className="flex h-full w-full flex-col overflow-hidden">
-      <TabsList className="sticky h-auto w-full flex-shrink-0 justify-start overflow-hidden rounded-none border-b p-0 shadow-sm dark:border-slate-500">
+    <Tabs defaultValue={pages[0]?.id} className="flex flex-col w-full h-full overflow-hidden">
+      <TabsList className="sticky justify-start flex-shrink-0 w-full h-auto p-0 overflow-hidden border-b rounded-none shadow-sm dark:border-slate-500">
         {pages.map(p => (
           <TabsTrigger
             value={p.id}

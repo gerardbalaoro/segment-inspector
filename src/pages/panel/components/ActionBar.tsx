@@ -15,8 +15,8 @@ export default function ActionBar() {
     <div className="flex gap-0.5 xs:gap-1">
       <DropdownMenu>
         <DropdownMenuTrigger asChild={true}>
-          <Button variant="ghost" size="icon" title="Change Theme" className="w-8 h-8 xs:h-10 xs:w-10">
-            <span className="w-4 h-4 xs:h-5 xs:w-5">
+          <Button variant="ghost" size="icon" title="Change Theme" className="w-8 h-8">
+            <span className="w-4 h-4">
               <If condition={theme.isDarkMode}>
                 <Then>
                   <MoonIcon />
@@ -34,13 +34,13 @@ export default function ActionBar() {
           <DropdownMenuItem onClick={() => theme.setAuto()}>System</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button variant="ghost" size="icon" title="Clear Events" className="w-8 h-8 xs:h-10 xs:w-10" onClick={clear}>
-        <span className="w-4 h-4 xs:h-5 xs:w-5">
+      <Button variant="ghost" size="icon" title="Clear Events" className="w-8 h-8" onClick={clear}>
+        <span className="w-4 h-4">
           <BanIcon />
         </span>
       </Button>
-      <Button variant="ghost" size="icon" title="Reload Page" className="w-8 h-8 xs:h-10 xs:w-10" onClick={refresh}>
-        <span className="w-4 h-4 xs:h-5 xs:w-5">
+      <Button variant="ghost" size="icon" title="Reload Page" className="w-8 h-8" onClick={refresh}>
+        <span className="w-4 h-4">
           <RotateCwIcon />
         </span>
       </Button>

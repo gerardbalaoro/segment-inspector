@@ -14,7 +14,7 @@ export const onRequest = (handler: (request: NetworkRequest) => void) => {
     }
 
     delete message.type;
-    console.log('Received request message', message);
+    console.debug('Received request message', message);
     handler(message as NetworkRequest);
   });
 };

@@ -1,10 +1,10 @@
 import {
   AppWindowIcon,
   AtSignIcon,
-  FileIcon,
+  CheckCircle2Icon,
   FingerprintIcon,
+  GanttChartSquareIcon,
   GroupIcon,
-  RadioIcon,
   type LucideIcon,
 } from 'lucide-react';
 import { SegmentEventType } from '../../../shared/segment';
@@ -13,9 +13,9 @@ const icons: Record<SegmentEventType, LucideIcon> = {
   alias: AtSignIcon,
   group: GroupIcon,
   identify: FingerprintIcon,
-  page: FileIcon,
+  page: GanttChartSquareIcon,
   screen: AppWindowIcon,
-  track: RadioIcon,
+  track: CheckCircle2Icon,
 };
 
 type Props = React.HTMLAttributes<HTMLOrSVGElement> & {
@@ -23,7 +23,7 @@ type Props = React.HTMLAttributes<HTMLOrSVGElement> & {
 };
 
 export default function EventTypeIcon({ type, ...props }: Props) {
-  const Icon = icons[type] || RadioIcon;
+  const Icon = icons[type] || CheckCircle2Icon;
 
   return <Icon {...props} />;
 }

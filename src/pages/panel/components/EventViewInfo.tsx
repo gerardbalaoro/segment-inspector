@@ -1,6 +1,6 @@
 import { Button } from '@components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/ui/table';
-import { ClockIcon, CopyIcon, MessageSquareIcon, TagIcon } from 'lucide-react';
+import { ClockIcon, CopyIcon, InfoIcon, MessageSquareIcon } from 'lucide-react';
 import { When } from 'react-if';
 import { SegmentEvent } from '../../../shared/segment';
 
@@ -105,7 +105,7 @@ export default function EventViewInfo({ event }: { event: SegmentEvent }) {
   return (
     <div className="flex flex-col gap-4 p-4 text-sm">
       <Info.CompactList>
-        <Info.CompactListItem title={<TagIcon className="w-4 h-4" />} body={title(event.type)} />
+        <Info.CompactListItem title={<InfoIcon type={event.type} className="w-4 h-4" />} body={title(event.type)} />
         <Info.CompactListItem title={<MessageSquareIcon className="w-4 h-4" />} body={event.id} />
         <Info.CompactListItem
           title={<ClockIcon className="w-4 h-4" />}

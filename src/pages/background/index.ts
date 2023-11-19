@@ -9,7 +9,7 @@ webRequest.onBeforeRequest.addListener(
 
     const body = String.fromCharCode.apply(null, new Uint8Array(requestBody.raw[0].bytes));
 
-    console.log('Intercepted request', url);
+    console.debug('Intercepted request', url);
     runtime.sendMessage({ type: 'request', url, body, method });
   },
   { urls: ['<all_urls>'] },

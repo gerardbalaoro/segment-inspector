@@ -7,7 +7,6 @@ import React, { useEffect, useState } from 'react';
 import { SegmentEvent } from '../../../shared/segment';
 import EventTypeIcon from './EventTypeIcon';
 
-import useEventStore from '@root/src/shared/hooks/useEventStore';
 import { cn } from '@src/shared/utils/ui';
 
 dayjs.extend(updateLocale);
@@ -36,13 +35,19 @@ dayjs.updateLocale('en', {
 
 type Props = {
   event: SegmentEvent;
+  isActive?: boolean;
+  onClick?: (event: SegmentEvent) => void;
 };
 
-export const EventListItem: React.FC<Props> = ({ event }) => {
-  const { open, close, active } = useEventStore();
+export const EventListItem: React.FC<Props> = ({ event, isActive, onClick }) => {
   const [timestamp, setTimestamp] = useState(event.timestamp.fromNow());
 
-  const isActive = active.id === event.id;
+  const handleClick: React.MouseEventHandler = e => {
+    e.preventDefault();
+    if (typeof onClick === 'function') {
+      onClick(event);
+    }
+  };
 
   useEffect(() => {
     let frame = null;
@@ -69,7 +74,7 @@ export const EventListItem: React.FC<Props> = ({ event }) => {
         'hover:bg-slate-50 dark:border-slate-500 dark:hover:bg-slate-800',
         isActive && ['bg-primary-500 text-white hover:bg-primary-500', 'dark:bg-primary-600 dark:hover:bg-primary-600'],
       )}
-      onClick={() => (isActive ? close() : open(event.id))}
+      onClick={handleClick}
     >
       <p className="flex items-center gap-2 mx-0 min-w-auto xs:min-w-20">
         <EventTypeIcon type={event.type} className="w-4 h-4" />

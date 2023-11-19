@@ -1,8 +1,8 @@
 import Panel from '@pages/panel/Panel';
+import { createContext } from 'react';
 import { createRoot } from 'react-dom/client';
 import refreshOnUpdate from 'virtual:reload-on-update-in-view';
 import { devtools } from 'webextension-polyfill';
-import { createContext } from 'react';
 
 refreshOnUpdate('pages/panel');
 

@@ -7,16 +7,26 @@ import EventList from './components/EventList';
 import { When } from 'react-if';
 import EventView from './components/EventView';
 
+import { SegmentEvent } from '@root/src/shared/segment';
 import { onRequest } from '@src/shared/browser';
-import useEventStore from '@src/shared/hooks/useEventStore';
+import useEventBrowser from '@src/shared/hooks/useEventBrowser';
 import useTheme from '@src/shared/hooks/useTheme';
-import { SegmentEvent } from '@src/shared/segment';
 import { cn } from '@src/shared/utils/ui';
 import ActionBar from './components/ActionBar';
 
 const Panel: React.FC = () => {
   const theme = useTheme();
-  const { active, add } = useEventStore();
+  const eventBrowser = useEventBrowser();
+
+  const events = eventBrowser.list.map(e => new SegmentEvent(e));
+  const active = eventBrowser.active ? new SegmentEvent(eventBrowser.active) : null;
+  const preview = (event: SegmentEvent) => {
+    if (eventBrowser.active?.messageId === event.id) {
+      eventBrowser.close();
+    } else {
+      eventBrowser.open(event.id);
+    }
+  };
 
   useEffect(() => {
     document.body.classList.toggle('dark', theme.isDarkMode);
@@ -32,11 +42,7 @@ const Panel: React.FC = () => {
 
       try {
         const data = JSON.parse(request.body);
-        const event = new SegmentEvent(data);
-
-        if (event.name) {
-          add(event);
-        }
+        eventBrowser.add(data);
       } catch (e) {
         console.error(e);
       }
@@ -52,11 +58,11 @@ const Panel: React.FC = () => {
             Segment<span className="hidden xs:inline"> Inspector</span>
           </h1>
         </div>
-        <ActionBar />
+        <ActionBar onClearEvents={eventBrowser.clear} />
       </header>
       <main className="flex flex-col w-full h-full m-0 overflow-hidden md:flex-row">
         <section className="w-full h-full overflow-hidden">
-          <EventList />
+          <EventList events={events} active={active} onEventClick={preview} />
         </section>
         <div className="w-full h-px bg-slate-200 dark:bg-slate-500 md:h-full md:w-px"></div>
         <When condition={!!active}>

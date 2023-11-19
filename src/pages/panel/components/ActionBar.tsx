@@ -1,14 +1,16 @@
 import { Button } from '@components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@components/ui/dropdown-menu';
 import { reload } from '@root/src/shared/browser';
-import useEventStore from '@root/src/shared/hooks/useEventStore';
 import useTheme from '@root/src/shared/hooks/useTheme';
 import { BanIcon, MoonIcon, RotateCwIcon, SunIcon } from 'lucide-react';
 import { Else, If, Then } from 'react-if';
 
-export default function ActionBar() {
+type Props = {
+  onClearEvents: () => void;
+};
+
+export default function ActionBar({ onClearEvents }: Props) {
   const theme = useTheme();
-  const { clear } = useEventStore();
   const refresh = () => reload();
 
   return (
@@ -34,7 +36,7 @@ export default function ActionBar() {
           <DropdownMenuItem onClick={() => theme.setAuto()}>System</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button variant="ghost" size="icon" title="Clear Events" className="w-8 h-8" onClick={clear}>
+      <Button variant="ghost" size="icon" title="Clear Events" className="w-8 h-8" onClick={onClearEvents}>
         <span className="w-4 h-4">
           <BanIcon />
         </span>

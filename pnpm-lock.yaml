@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@fontsource/inter':
     specifier: ^5.0.15
@@ -100,8 +104,8 @@ devDependencies:
     specifier: ^0.10.6
     version: 0.10.6
   '@types/ws':
-    specifier: 8.5.8
-    version: 8.5.8
+    specifier: 8.5.9
+    version: 8.5.9
   '@typescript-eslint/eslint-plugin':
     specifier: 6.9.1
     version: 6.9.1(@typescript-eslint/parser@6.9.1)(eslint@8.53.0)(typescript@5.2.2)
@@ -2260,8 +2264,8 @@ packages:
     resolution: {integrity: sha512-tHMENOd86LDISoxw/8C3KFazU1T6X5+eMhI3AS0KU9pYVLYb4kuQ2tIdrpE9aBqd2y8Ix4cVwR/Jwm2fzABTow==}
     dev: true
 
-  /@types/ws@8.5.8:
-    resolution: {integrity: sha512-flUksGIQCnJd6sZ1l5dqCEG/ksaoAg/eUwiLAGTJQcfgvZJKF++Ta4bJA6A5aPSJmsr+xlseHn4KLgVlNnvPTg==}
+  /@types/ws@8.5.9:
+    resolution: {integrity: sha512-jbdrY0a8lxfdTp/+r7Z4CkycbOFN8WX+IOchLJr3juT/xzbJ8URyTVSJ/hvNdadTgM1mnedb47n+Y31GsFnQlg==}
     dependencies:
       '@types/node': 20.8.10
     dev: true
@@ -8313,7 +8317,3 @@ packages:
       compress-commons: 5.0.1
       readable-stream: 3.6.2
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

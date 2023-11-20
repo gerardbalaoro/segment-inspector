@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { SegmentEventData } from '../segment';
+import { SegmentEvent, SegmentEventData } from '../segment';
 
 export default function useEventBrowser() {
   const [events, setEvents] = useState<SegmentEventData[]>([]);
@@ -20,9 +20,11 @@ export default function useEventBrowser() {
     active,
     add: (event: SegmentEventData) => {
       setEvents(events => {
-        const existing = events.find(e => e.messageId === event.messageId);
-        if (typeof existing === 'undefined') {
-          return [event, ...events];
+        if (SegmentEvent.validate(event)) {
+          const existing = events.find(e => e.messageId === event.messageId);
+          if (typeof existing === 'undefined') {
+            return [event, ...events];
+          }
         }
         return events;
       });

@@ -9,6 +9,14 @@ export { CoreSegmentEvent as SegmentEventData, SegmentEventType };
 export class SegmentEvent {
   constructor(public data: CoreSegmentEvent) {}
 
+  static validate(data: unknown) {
+    if (typeof data === 'object') {
+      return 'messageId' in data && 'context' in data && 'anonymousId' in data && 'timestamp' in data && 'type' in data;
+    }
+
+    return false;
+  }
+
   get id() {
     return this.data.messageId;
   }

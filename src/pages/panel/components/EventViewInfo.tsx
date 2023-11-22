@@ -62,7 +62,7 @@ class Info {
                 variant="ghost"
                 size="icon"
                 title="Copy"
-                className="w-6 h-6 text-primary-500 hover:text-primary-500 hover:bg-primary-100"
+                className="w-6 h-6"
                 onClick={() => clipboard(body.toString())}
               >
                 <CopyIcon className="w-3 h-3" />

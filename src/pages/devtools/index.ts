@@ -1,7 +1,8 @@
-import { createPanel } from '@root/src/shared/browser';
+import icon from '@assets/img/icon.svg';
+import { devtools } from '@src/shared/browser';
 
 try {
-  createPanel('Segment', '/icon-48.png', '/src/pages/panel/index.html');
+  devtools.panel('Segment', icon, '/src/pages/panel/index.html');
 } catch (e) {
   console.error(e);
 }

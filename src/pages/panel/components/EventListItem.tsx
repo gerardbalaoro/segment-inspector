@@ -70,9 +70,13 @@ export const EventListItem: React.FC<Props> = ({ event, isActive, onClick }) => 
   return (
     <li
       className={cn(
-        'flex flex-wrap grid-rows-2 flex-shrink-0 cursor-pointer gap-1 items-center border-b px-4 py-2 text-sm overflow-hidden w-full',
+        'flex flex-wrap grid-rows-2 flex-shrink-0 gap-1 items-center px-4 py-2',
+        'cursor-pointer text-sm overflow-hidden w-full border-y border-t-transparent',
         'hover:bg-slate-50 dark:border-slate-500 dark:hover:bg-slate-800',
-        isActive && ['bg-primary-500 text-white hover:bg-primary-500', 'dark:bg-primary-600 dark:hover:bg-primary-600'],
+        isActive && [
+          'border-primary-500 !bg-primary-200 !bg-opacity-25',
+          'dark:border-primary-500 dark:!bg-primary-500 dark:!bg-opacity-25',
+        ],
       )}
       onClick={handleClick}
     >

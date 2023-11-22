@@ -8,7 +8,7 @@ import { When } from 'react-if';
 import EventView from './components/EventView';
 
 import { SegmentEvent } from '@root/src/shared/segment';
-import { onRequest } from '@src/shared/browser';
+import { window } from '@src/shared/browser';
 import useEventBrowser from '@src/shared/hooks/useEventBrowser';
 import useTheme from '@src/shared/hooks/useTheme';
 import { cn } from '@src/shared/utils/ui';
@@ -33,7 +33,7 @@ const Panel: React.FC = () => {
   }, [theme.isDarkMode]);
 
   useEffect(() => {
-    onRequest(request => {
+    window.onRequest(request => {
       const url = new URL(request.url);
 
       if (url.host !== 'api.segment.io') {

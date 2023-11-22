@@ -3,7 +3,7 @@ body {
 }
 
 #panel {
-  @apply font-sans text-base text-slate-800;
+  @apply bg-white font-sans text-base text-slate-800;
   @apply relative m-0 flex h-full flex-col;
   @apply dark:bg-slate-900 dark:text-white;
 }

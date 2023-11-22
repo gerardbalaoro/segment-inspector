@@ -6,11 +6,7 @@ export default function useEventBrowser() {
   const [messageId, setMessageId] = useState<string | null>(null);
 
   const active = useMemo<SegmentEventData | null>(() => {
-    let event = events[0];
-
-    if (messageId) {
-      event = events.find(e => e.messageId === messageId);
-    }
+    const event = messageId ? events.find(e => e.messageId === messageId) : null;
 
     return event ?? null;
   }, [events, messageId]);

@@ -12,6 +12,8 @@ class ManifestParser {
   static convertManifestToString(manifest: Manifest): string {
     if (process.env.__FIREFOX__) {
       manifest = this.convertToFirefoxCompatibleManifest(manifest);
+    } else if (manifest.browser_specific_settings) {
+      delete manifest.browser_specific_settings;
     }
     return JSON.stringify(manifest, null, 2);
   }

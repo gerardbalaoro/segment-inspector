@@ -7,5 +7,6 @@ export default {
   printWidth: 120,
   bracketSameLine: false,
   htmlWhitespaceSensitivity: 'strict',
+  endOfLine: 'lf',
   plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-organize-imports'],
 };

@@ -1,6 +1,6 @@
 {
   "name": "segment-inspector",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A browser extension for debugging Twilio Segment events",
   "license": "MIT",
   "repository": {
@@ -41,13 +41,15 @@
     "dayjs": "^1.11.10",
     "jotai": "^2.5.1",
     "lucide-react": "^0.292.0",
+    "minimatch": "^9.0.3",
     "radash": "^11.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-if": "^4.1.5",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
-    "webextension-polyfill": "0.10.0"
+    "webextension-polyfill": "0.10.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@commitlint/cli": "18.2.0",

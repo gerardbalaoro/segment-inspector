@@ -1,13 +1,9 @@
 ## [0.1.5](https://github.com/gerardbalaoro/segment-inspector/compare/v0.1.4...v0.1.5) (2023-11-23)
 
 
-### Performance Improvements
+### Features
 
-* use runtime ports for messaging ([e334a4d](https://github.com/gerardbalaoro/segment-inspector/commit/e334a4d092b89df4c7af54e60da6eb4a2660833d))
-
-
-
-## [0.1.5](https://github.com/gerardbalaoro/segment-inspector/compare/v0.1.4...v0.1.5) (2023-11-23)
+* show event request status ([60cea6b](https://github.com/gerardbalaoro/segment-inspector/commit/60cea6bcfc33a413e914e42d66ecdecf68baa579))
 
 
 ### Performance Improvements
@@ -17,6 +13,11 @@
 
 
 ## [0.1.5](https://github.com/gerardbalaoro/segment-inspector/compare/v0.1.4...v0.1.5) (2023-11-23)
+
+
+### Features
+
+* show event request status ([60cea6b](https://github.com/gerardbalaoro/segment-inspector/commit/60cea6bcfc33a413e914e42d66ecdecf68baa579))
 
 
 ### Performance Improvements

@@ -13,9 +13,10 @@
     "types": ["vite/client", "node"],
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./src/global.d.ts", "node_modules/@types"],
+    "typeRoots": ["./src/global.d.ts", "node_modules/@types", "node_modules/web-ext-types"],
     "paths": {
       "@root/*": ["./*"],
       "@src/*": ["src/*"],

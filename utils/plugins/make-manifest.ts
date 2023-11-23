@@ -64,7 +64,7 @@ export default function makeManifest(
       root = config.root || process.cwd();
       output = config.build.outDir;
     },
-    buildEnd() {
+    closeBundle() {
       generate();
     },
   };

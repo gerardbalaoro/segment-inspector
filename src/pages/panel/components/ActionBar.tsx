@@ -1,9 +1,9 @@
 import { Button } from '@components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@components/ui/dropdown-menu';
-import { window } from '@root/src/shared/browser';
 import useTheme from '@root/src/shared/hooks/useTheme';
 import { BanIcon, MoonIcon, RotateCwIcon, SunIcon } from 'lucide-react';
 import { Else, If, Then } from 'react-if';
+import browser from 'webextension-polyfill';
 
 type Props = {
   onClearEvents: () => void;
@@ -11,7 +11,7 @@ type Props = {
 
 export default function ActionBar({ onClearEvents }: Props) {
   const theme = useTheme();
-  const refresh = () => window.reload();
+  const refresh = () => browser.devtools.inspectedWindow.reload();
 
   return (
     <div className="flex gap-0.5 xs:gap-1">

@@ -1,8 +1,8 @@
 import icon from '@assets/img/icon.svg';
-import { devtools } from '@src/shared/browser';
+import browser from 'webextension-polyfill';
 
 try {
-  devtools.panel('Segment', icon, '/src/pages/panel/index.html');
+  browser.devtools.panels.create('Segment', icon, '/src/pages/panel/index.html');
 } catch (e) {
   console.error(e);
 }

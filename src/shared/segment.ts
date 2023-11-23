@@ -37,9 +37,9 @@ export class SegmentEvent {
       case 'track':
         return this.data.event;
       case 'page':
-        return this.data.name ?? this.data.properties.title ?? this.data.context.page.path;
+        return this.data.name || this.data.properties.title || this.data.context.page.path;
       case 'screen':
-        return this.data.name ?? 'UNNAMED_SCREEN';
+        return this.data.name || 'UNNAMED_SCREEN';
     }
 
     return '';

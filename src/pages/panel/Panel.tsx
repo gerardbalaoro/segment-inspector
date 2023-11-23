@@ -1,21 +1,24 @@
 import logo from '@assets/img/icon.svg';
 import '@assets/style/theme.css';
 import '@pages/panel/Panel.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import EventList from './components/EventList';
 
 import { When } from 'react-if';
 import EventView from './components/EventView';
 
 import { SegmentEvent } from '@root/src/shared/segment';
-import { window } from '@src/shared/browser';
 import useEventBrowser from '@src/shared/hooks/useEventBrowser';
 import useTheme from '@src/shared/hooks/useTheme';
 import { cn } from '@src/shared/utils/ui';
+import { minimatch } from 'minimatch';
+import browser from 'webextension-polyfill';
+import { z } from 'zod';
 import ActionBar from './components/ActionBar';
 
 const Panel: React.FC = () => {
   const theme = useTheme();
+  const [id] = useState(browser.devtools.inspectedWindow.tabId);
   const eventBrowser = useEventBrowser();
 
   const events = eventBrowser.list.map(e => new SegmentEvent(e));
@@ -28,26 +31,48 @@ const Panel: React.FC = () => {
     }
   };
 
+  const listener = (message: Record<string, unknown>) => {
+    const patterns = ['https://*api.segment.io/v1/*'];
+    const Request = z.object({
+      url: z.string(),
+      tabId: z.literal(id),
+      method: z.literal('POST'),
+      body: z.string(),
+    });
+
+    if (typeof message !== 'object' || message.event !== 'request:sent') {
+      return;
+    }
+
+    const request = Request.safeParse(message.data);
+
+    if (!request.success) {
+      return;
+    }
+
+    try {
+      const { url, body } = request.data;
+      if (patterns.some(pattern => minimatch(url, pattern))) {
+        eventBrowser.add(JSON.parse(body));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     document.body.classList.toggle('dark', theme.isDarkMode);
   }, [theme.isDarkMode]);
 
   useEffect(() => {
-    window.onRequest(request => {
-      const url = new URL(request.url);
+    const background = browser.runtime.connect({ name: `devtools-${id}` });
 
-      if (url.host !== 'api.segment.io') {
-        return;
-      }
-
-      try {
-        const data = JSON.parse(request.body);
-        eventBrowser.add(data);
-      } catch (e) {
-        console.error(e);
-      }
-    });
-  });
+    if (!background.onMessage.hasListener(listener)) {
+      background.onMessage.addListener(listener);
+      console.log('[Panel] Connected to background script');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

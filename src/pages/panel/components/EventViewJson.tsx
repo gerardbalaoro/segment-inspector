@@ -71,7 +71,7 @@ export default function EventViewJson({ event }: { event: SegmentEvent }) {
       className="h-full w-full overflow-auto p-4 !font-mono !text-xs !leading-4"
       style={isDarkMode ? darkColors : lightColors}
       indentWidth={12}
-      value={event.data}
+      value={event.raw}
       objectSortKeys={true}
       displayDataTypes={false}
       displayObjectSize={false}

@@ -1,11 +1,12 @@
+import { Alert, AlertDescription, AlertTitle } from '@components/ui/alert';
 import { Button } from '@components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@components/ui/table';
-import { ClockIcon, CopyIcon, InfoIcon, MessageSquareIcon } from 'lucide-react';
+import { AlertCircleIcon, ClockIcon, CopyIcon, InfoIcon, MessageSquareIcon } from 'lucide-react';
 import { When } from 'react-if';
 import { SegmentEvent } from '../../../shared/segment';
 
 import { clipboard, cn } from '@src/shared/utils/ui';
-import { alphabetical, crush, listify, pick, title } from 'radash';
+import { alphabetical, crush, get, listify, pick, title } from 'radash';
 
 class Info {
   static CompactList({ children, className, ...props }: React.HTMLAttributes<HTMLElement>) {
@@ -78,6 +79,8 @@ class Info {
 export default function EventViewInfo({ event }: { event: SegmentEvent }) {
   type Property = { key: string; value: unknown };
 
+  const hasError = event.data._request?.completed_at && event.data._request?.response !== 200;
+
   const filter = (properties: Property[]) => {
     return properties.filter(({ value }) => typeof value !== 'undefined');
   };
@@ -104,6 +107,19 @@ export default function EventViewInfo({ event }: { event: SegmentEvent }) {
 
   return (
     <div className="flex flex-col gap-4 p-4 text-sm">
+      <When condition={hasError}>
+        <Alert
+          variant="destructive"
+          className="!bg-red-100 !bg-opacity-25 dark:!bg-red-600 dark:!bg-opacity-25 dark:!border-red-600 dark:text-red-300"
+        >
+          <AlertCircleIcon className="w-4 h-4 text-current" />
+          <AlertTitle>
+            Request Failed: {get(event.data._request, 'error', event.data._request.response ?? 'Unknown')}
+          </AlertTitle>
+          <AlertDescription>Please see the network or console panel.</AlertDescription>
+        </Alert>
+      </When>
+
       <Info.CompactList>
         <Info.CompactListItem title={<InfoIcon type={event.type} className="w-4 h-4" />} body={title(event.type)} />
         <Info.CompactListItem title={<MessageSquareIcon className="w-4 h-4" />} body={event.id} />

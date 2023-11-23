@@ -11,7 +11,7 @@ type Props = {
 export default function EventList({ events, active, onEventClick }: Props) {
   return (
     <ScrollArea className="w-full h-full overflow-auto">
-      <ul className="flex flex-col w-full h-full">
+      <ul className="flex flex-col w-full h-full mt-px">
         {events.map(e => (
           <EventListItem key={e.id} event={e} isActive={e.id === active?.id} onClick={onEventClick} />
         ))}

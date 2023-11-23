@@ -41,6 +41,7 @@ type Props = {
 
 export const EventListItem: React.FC<Props> = ({ event, isActive, onClick }) => {
   const [timestamp, setTimestamp] = useState(event.timestamp.fromNow());
+  const hasError = event.data._request?.completed_at && event.data._request?.response !== 200;
 
   const handleClick: React.MouseEventHandler = e => {
     e.preventDefault();
@@ -71,12 +72,25 @@ export const EventListItem: React.FC<Props> = ({ event, isActive, onClick }) => 
     <li
       className={cn(
         'flex flex-wrap grid-rows-2 flex-shrink-0 gap-1 items-center px-4 py-2',
-        'cursor-pointer text-sm overflow-hidden w-full border-y border-t-transparent',
-        'hover:bg-slate-50 dark:border-slate-500 dark:hover:bg-slate-800',
-        isActive && [
-          'border-primary-500 !bg-primary-200 !bg-opacity-25',
-          'dark:border-primary-500 dark:!bg-primary-500 dark:!bg-opacity-25',
-        ],
+        'cursor-pointer text-sm overflow-hidden w-full border-y -mt-px',
+        !isActive && !hasError && ['hover:bg-slate-50 dark:border-slate-500 dark:hover:bg-slate-800'],
+        !isActive &&
+          hasError && [
+            'border-yellow-500 bg-yellow-200 bg-opacity-25 text-yellow-800 z-[1]',
+            'hover:border-orange-500 hover:bg-orange-50 text-orange-800',
+            'dark:border-yellow-500 dark:hover:bg-yellow-800 dark:text-yellow-100',
+            'dark:hover:border-orange-500 dark:!bg-orange-500 dark:!bg-opacity-25 dark:text-orange-100',
+          ],
+        isActive &&
+          hasError && [
+            'border-red-500 !bg-red-200 !bg-opacity-25 text-red-800 z-[1]',
+            'dark:border-red-500 dark:!bg-red-500 dark:!bg-opacity-25 dark:text-red-100',
+          ],
+        isActive &&
+          !hasError && [
+            'border-primary-500 !bg-primary-200 !bg-opacity-25 text-primary-800 z-[2]',
+            'dark:border-primary-500 dark:!bg-primary-500 dark:!bg-opacity-25 dark:text-primary-100',
+          ],
       )}
       onClick={handleClick}
     >

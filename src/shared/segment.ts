@@ -1,13 +1,23 @@
 import type { CoreSegmentEvent, SegmentEventType } from '@segment/analytics-core';
 import dayjs from 'dayjs';
 import localizeFormat from 'dayjs/plugin/localizedFormat';
+import { omit } from 'radash';
 
 dayjs.extend(localizeFormat);
 
-export { CoreSegmentEvent as SegmentEventData, SegmentEventType };
+export { SegmentEventType };
+
+export type SegmentEventData = CoreSegmentEvent & {
+  _request?: {
+    id: string;
+    error?: string;
+    response?: number;
+    completed_at?: string;
+  };
+};
 
 export class SegmentEvent {
-  constructor(public data: CoreSegmentEvent) {}
+  constructor(public data: SegmentEventData) {}
 
   static validate(data: unknown) {
     if (typeof data === 'object') {
@@ -59,5 +69,9 @@ export class SegmentEvent {
 
   get properties() {
     return this.data.properties;
+  }
+
+  get raw() {
+    return omit(this.data, ['_request']);
   }
 }

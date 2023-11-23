@@ -8,6 +8,9 @@ on:
 
 env:
   PACKAGE_NAME: segment-inspector-${{ github.ref_name }}
+  WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
+  WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
+  CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
 
 jobs:
   build:
@@ -27,9 +30,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Build Project
-        run: |
-          pnpm run build
-          pnpm run pack
+        run: pnpm run build
+      - name: Create Packages
+        run: ${{ startsWith(github.ref, 'refs/tags/') && 'pnpm run pack --sign' || 'pnpm run pack' }}
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ env.PACKAGE_NAME }}

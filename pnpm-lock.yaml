@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@fontsource/inter':
     specifier: ^5.0.15
@@ -100,8 +104,8 @@ devDependencies:
     specifier: ^0.10.6
     version: 0.10.6
   '@types/ws':
-    specifier: 8.5.8
-    version: 8.5.8
+    specifier: 8.5.10
+    version: 8.5.10
   '@typescript-eslint/eslint-plugin':
     specifier: 6.9.1
     version: 6.9.1(@typescript-eslint/parser@6.9.1)(eslint@8.53.0)(typescript@5.2.2)
@@ -2293,8 +2297,8 @@ packages:
     resolution: {integrity: sha512-tHMENOd86LDISoxw/8C3KFazU1T6X5+eMhI3AS0KU9pYVLYb4kuQ2tIdrpE9aBqd2y8Ix4cVwR/Jwm2fzABTow==}
     dev: true
 
-  /@types/ws@8.5.8:
-    resolution: {integrity: sha512-flUksGIQCnJd6sZ1l5dqCEG/ksaoAg/eUwiLAGTJQcfgvZJKF++Ta4bJA6A5aPSJmsr+xlseHn4KLgVlNnvPTg==}
+  /@types/ws@8.5.10:
+    resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
     dependencies:
       '@types/node': 20.8.10
     dev: true
@@ -8841,7 +8845,7 @@ packages:
   /webext-buildtools-utils@1.0.15:
     resolution: {integrity: sha512-rb+1sbhufaN3vcpoVJdukQtgnpKS+A/2oP40yechzflb1Yt2SMVo/vj+wY5mbyZ5by2IQJ79RkQ3GmC5h0GokQ==}
     dependencies:
-      buffer-indexof-polyfill: github.com/cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de
+      buffer-indexof-polyfill: git/github.com+cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de
       fs-extra: 10.1.0
       lodash: 4.17.21
       sanitize-filename: 1.6.3
@@ -9135,13 +9139,9 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
-  github.com/cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de:
-    resolution: {tarball: https://codeload.github.com/cardinalby/buffer-indexof-polyfill/tar.gz/dd4d89a6b2b877d7f129b339dfd7c014f10435de}
+  git/github.com+cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de:
+    resolution: {commit: dd4d89a6b2b877d7f129b339dfd7c014f10435de, repo: git@github.com:cardinalby/buffer-indexof-polyfill.git, type: git}
     name: buffer-indexof-polyfill
     version: 1.0.1
     engines: {node: '>=0.10'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

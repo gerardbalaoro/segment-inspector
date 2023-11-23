@@ -1,3 +1,4 @@
+import { program } from 'commander';
 import { createConsola } from 'consola';
 import 'dotenv/config';
 import { get } from 'radash';
@@ -40,41 +41,56 @@ const Builder = function (source: string, options: IIntegratedOptions) {
 };
 
 const builders = {
-  chrome: async () => {
+  chrome: async (sign = false) => {
     const builder = new Builder('dist/chrome', {
       zipOptions: {
         zipOutPath: `${filename}-chrome.zip`,
       },
-      chromeCrx: {
-        privateKey: Buffer.from(process.env.CRX_PRIVATE_KEY, 'utf-8'),
-        crxFilePath: `${filename}.crx`,
-      },
+      ...(sign
+        ? {
+            chromeCrx: {
+              privateKey: Buffer.from(process.env.CRX_PRIVATE_KEY, 'utf-8'),
+              crxFilePath: `${filename}.crx`,
+            },
+          }
+        : {}),
     });
 
     await builder.run();
   },
-  firefox: async () => {
+  firefox: async (sign = false) => {
     const builder = new Builder('dist/firefox', {
       zipOptions: {
         zipOutPath: `${filename}-firefox.zip`,
       },
-      firefoxAddons: {
-        api: {
-          jwtIssuer: process.env.WEB_EXT_API_KEY,
-          jwtSecret: process.env.WEB_EXT_API_SECRET,
-        },
-        // signXpi: {
-        //   xpiOutPath: `${filename}.xpi`,
-        // },
-      },
+      ...(sign
+        ? {
+            firefoxAddons: {
+              api: {
+                jwtIssuer: process.env.WEB_EXT_API_KEY,
+                jwtSecret: process.env.WEB_EXT_API_SECRET,
+              },
+              // signXpi: {
+              //   xpiOutPath: `${filename}.xpi`,
+              // },
+            },
+          }
+        : {}),
     });
 
     await builder.run();
   },
 };
 
+program.option('--sign', 'generate signed packages', false).parse(process.argv);
+
+const options = program.opts();
+
+consola.debug('call', process.argv);
+consola.debug('opts', options);
+
 for (const name in builders) {
   consola.start('Building ' + name);
-  await builders[name]();
+  await builders[name](!!options.sign);
   consola.log('');
 }

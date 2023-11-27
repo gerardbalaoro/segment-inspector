@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@fontsource/inter':
     specifier: ^5.0.15
@@ -41,8 +45,8 @@ dependencies:
     specifier: ^2.5.1
     version: 2.5.1(@types/react@18.2.35)(react@18.2.0)
   lucide-react:
-    specifier: ^0.292.0
-    version: 0.292.0(react@18.2.0)
+    specifier: ^0.293.0
+    version: 0.293.0(react@18.2.0)
   minimatch:
     specifier: ^9.0.3
     version: 9.0.3
@@ -6574,8 +6578,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-react@0.292.0(react@18.2.0):
-    resolution: {integrity: sha512-rRgUkpEHWpa5VCT66YscInCQmQuPCB1RFRzkkxMxg4b+jaL0V12E3riWWR2Sh5OIiUhCwGW/ZExuEO4Az32E6Q==}
+  /lucide-react@0.293.0(react@18.2.0):
+    resolution: {integrity: sha512-g3AN0EYITCpAjNgLHrKrFWvIJzZy0Y9OPBaonyKw1cM+nZE6piOM+TiuQdYfha7oa76TMiDaWXQHE44CEqsrzw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -9146,7 +9150,7 @@ packages:
   /webext-buildtools-utils@1.0.15:
     resolution: {integrity: sha512-rb+1sbhufaN3vcpoVJdukQtgnpKS+A/2oP40yechzflb1Yt2SMVo/vj+wY5mbyZ5by2IQJ79RkQ3GmC5h0GokQ==}
     dependencies:
-      buffer-indexof-polyfill: github.com/cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de
+      buffer-indexof-polyfill: git/github.com+cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de
       fs-extra: 10.1.0
       lodash: 4.17.21
       sanitize-filename: 1.6.3
@@ -9453,13 +9457,9 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
 
-  github.com/cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de:
-    resolution: {tarball: https://codeload.github.com/cardinalby/buffer-indexof-polyfill/tar.gz/dd4d89a6b2b877d7f129b339dfd7c014f10435de}
+  git/github.com+cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de:
+    resolution: {commit: dd4d89a6b2b877d7f129b339dfd7c014f10435de, repo: git@github.com:cardinalby/buffer-indexof-polyfill.git, type: git}
     name: buffer-indexof-polyfill
     version: 1.0.1
     engines: {node: '>=0.10'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

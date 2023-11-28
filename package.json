@@ -19,7 +19,7 @@
     "dev": "pnpm build:hmr && (run-p wss build:watch)",
     "dev:firefox": "pnpm build:hmr && (run-p wss build:firefox:watch)",
     "changelog": "conventional-changelog -p angular",
-    "version": "pnpm changelog -i CHANGELOG.md -s",
+    "version": "pnpm changelog -i CHANGELOG.md -s && git add CHANGELOG.md && git commit -m \"chore: update CHANGELOG.md\"",
     "test": "echo \"No tests.\"",
     "commitlint": "commitlint --edit",
     "lint": "eslint src --ext .ts",

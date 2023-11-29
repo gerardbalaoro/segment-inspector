@@ -40,7 +40,7 @@ jobs:
           path: packages/*
       - name: Generate Release Notes
         if: startsWith(github.ref, 'refs/tags/')
-        run: pnpm run --silent changelog -r 2 > RELEASE_NOTES.md
+        run: pnpm run changelog -r 2 -o RELEASE_NOTES.md
       - name: Upload Release Notes
         uses: actions/upload-artifact@v3
         if: startsWith(github.ref, 'refs/tags/')

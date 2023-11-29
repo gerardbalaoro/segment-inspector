@@ -1,4 +1,5 @@
 import Chrome from 'chrome';
+import { RequestDoneMessage, RequestSentMessage } from './shared/types';
 
 declare namespace chrome {
   export default Chrome;
@@ -12,6 +13,13 @@ declare module 'virtual:reload-on-update-in-background-script' {
 declare module 'virtual:reload-on-update-in-view' {
   const refreshOnUpdate: (watchPath: string) => void;
   export default refreshOnUpdate;
+}
+
+declare module 'webext-bridge' {
+  export interface ProtocolMap {
+    'request:sent': RequestSentMessage;
+    'request:complete': RequestDoneMessage;
+  }
 }
 
 declare module '*.svg' {

@@ -1,17 +1,20 @@
-import type { RequestMessage, ResponseMessage } from '@root/src/shared/types';
+import { RequestDoneMessage, RequestSentMessage } from '@root/src/shared/types';
 import dayjs from 'dayjs';
-import { minimatch } from 'minimatch';
-import browser, { Runtime, WebRequest, webRequest } from 'webextension-polyfill';
+import { sendMessage } from 'webext-bridge/background';
+import browser, { WebRequest, webRequest } from 'webextension-polyfill';
 
-const connections: Record<string, Runtime.Port> = {};
+const postMessage = (tab: number, subject: string, data) => {
+  const destination = `devtools@${tab}`;
 
-const dispatch = (target: string, event: string, data: unknown) => {
-  for (const port of Object.values(connections)) {
-    if (!minimatch(port.name, target)) {
-      continue;
-    }
+  if (tab < 1) {
+    console.log(`[Background] Skipped sending message to ${destination}`);
+    return;
+  }
 
-    port.postMessage({ event, data });
+  try {
+    sendMessage(subject, data, destination);
+  } catch (error) {
+    console.error(`[Background] Error sending message to ${destination}`, error);
   }
 };
 
@@ -29,41 +32,44 @@ const listeners = {
     }
 
     const body = String.fromCharCode.apply(null, new Uint8Array(requestBody.raw[0].bytes));
-    const data: RequestMessage = { id: requestId, url, method, body, tabId };
+    const validation = RequestSentMessage.safeParse({
+      id: requestId,
+      url,
+      method,
+      body,
+      tabId,
+    });
 
-    dispatch(`*-${tabId}`, 'request:sent', data);
+    if (validation.success) {
+      postMessage(tabId, 'request:sent', validation.data);
+    }
   },
   onRequestCompleted: (details: WebRequest.OnCompletedDetailsType) => {
     const { requestId, statusCode, tabId, timeStamp } = details;
-    const data: ResponseMessage = {
+    const validation = RequestDoneMessage.safeParse({
       id: requestId,
       code: statusCode,
       timestamp: dayjs(timeStamp).toISOString(),
       tabId,
-    };
+    });
 
-    dispatch(`*-${tabId}`, 'request:complete', data);
+    if (validation.success) {
+      postMessage(tabId, 'request:complete', validation.data);
+    }
   },
   onRequestFailed: (details: WebRequest.OnErrorOccurredDetailsType) => {
     const { requestId, tabId, timeStamp, error } = details;
-    const data: ResponseMessage = {
+    const validation = RequestDoneMessage.safeParse({
       id: requestId,
       error,
       code: 0,
       timestamp: dayjs(timeStamp).toISOString(),
       tabId,
-    };
-
-    dispatch(`*-${tabId}`, 'request:complete', data);
-  },
-  onConnect: (port: Runtime.Port) => {
-    port.onDisconnect.addListener((port: Runtime.Port) => {
-      delete connections[port.name];
-      console.log('[Background] Disconnected from ' + port.name);
     });
 
-    connections[port.name] = port;
-    console.log('[Background] Connected to ' + port.name);
+    if (validation.success) {
+      postMessage(tabId, 'request:complete', validation.data);
+    }
   },
 };
 
@@ -88,5 +94,6 @@ const listenToNetworkRequests = () => {
   console.log('[Background] Listening for network requests.');
 };
 
-browser.runtime.onConnect.addListener(listeners.onConnect);
-listenToNetworkRequests();
+browser.runtime.onInstalled.addListener(() => {
+  listenToNetworkRequests();
+});

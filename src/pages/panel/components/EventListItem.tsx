@@ -81,16 +81,10 @@ export const EventListItem: React.FC<Props> = ({ event, isActive, onClick }) => 
             'dark:border-yellow-500 dark:hover:bg-yellow-800 dark:text-yellow-100',
             'dark:hover:border-orange-500 dark:!bg-orange-500 dark:!bg-opacity-25 dark:text-orange-100',
           ],
-        isActive &&
-          hasError && [
-            'border-red-500 !bg-red-200 !bg-opacity-25 text-red-800 z-[1]',
-            'dark:border-red-500 dark:!bg-red-500 dark:!bg-opacity-25 dark:text-red-100',
-          ],
-        isActive &&
-          !hasError && [
-            'border-primary-500 !bg-primary-200 !bg-opacity-25 text-primary-800 z-[2]',
-            'dark:border-primary-500 dark:!bg-primary-500 dark:!bg-opacity-25 dark:text-primary-100',
-          ],
+        isActive && [
+          'border-primary-500 !bg-primary-200 !bg-opacity-25 text-primary-800 z-[2]',
+          'dark:border-primary-500 dark:!bg-primary-500 dark:!bg-opacity-25 dark:text-primary-100',
+        ],
       )}
       onClick={handleClick}
     >

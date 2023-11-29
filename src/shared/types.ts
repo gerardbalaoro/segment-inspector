@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const RequestMessage = z.object({
+export const RequestSentMessage = z.object({
   id: z.string(),
   url: z.string(),
   tabId: z.number(),
@@ -8,7 +8,7 @@ export const RequestMessage = z.object({
   body: z.string(),
 });
 
-export const ResponseMessage = z.object({
+export const RequestDoneMessage = z.object({
   id: z.string(),
   error: z.optional(z.string()),
   code: z.number(),
@@ -16,6 +16,6 @@ export const ResponseMessage = z.object({
   tabId: z.number(),
 });
 
-export type RequestMessage = z.infer<typeof RequestMessage>;
+export type RequestSentMessage = z.infer<typeof RequestSentMessage>;
 
-export type ResponseMessage = z.infer<typeof ResponseMessage>;
+export type RequestDoneMessage = z.infer<typeof RequestDoneMessage>;

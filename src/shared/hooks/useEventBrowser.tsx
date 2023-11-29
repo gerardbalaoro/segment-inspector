@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import { sort } from 'radash';
 import { useMemo, useState } from 'react';
 import { SegmentEvent, SegmentEventData } from '../segment';
-import { type ResponseMessage } from '../types';
 
 export default function useEventBrowser() {
   const [events, setEvents] = useState<SegmentEventData[]>([]);
@@ -14,13 +13,13 @@ export default function useEventBrowser() {
     return event ?? null;
   }, [events, messageId]);
 
-  const setReponse = (id: string, response: ResponseMessage) => {
+  const setReponse = (id: string, timestamp: string, code: number, error?: string) => {
     setEvents(events => {
       for (const event of events) {
         if (event._request?.id === id) {
-          event._request.completed_at = response.timestamp;
-          event._request.response = response.code;
-          event._request.error = response.error;
+          event._request.completed_at = dayjs(timestamp).toISOString();
+          event._request.response = code;
+          event._request.error = error;
         }
       }
 

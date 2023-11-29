@@ -1,3 +1,19 @@
+## [0.1.7](https://github.com/gerardbalaoro/segment-inspector/compare/v0.1.6...v0.1.7) (2023-11-29)
+
+
+### Features
+
+* keep events after panel is closed ([39170ab](https://github.com/gerardbalaoro/segment-inspector/commit/39170ab6ae11550c02dd89a127dca6e81ff7a5de))
+* minor UI changes ([8ca073a](https://github.com/gerardbalaoro/segment-inspector/commit/8ca073a720c2854638c42f4dc2ca2076c7766280))
+* use preferred developer tools theme ([aa8c8aa](https://github.com/gerardbalaoro/segment-inspector/commit/aa8c8aacffb960c166b7d5a1dcaca98dfb2a3436))
+
+
+### Performance Improvements
+
+* use webext-bridge to handle messaging ([54a37d0](https://github.com/gerardbalaoro/segment-inspector/commit/54a37d0bcf589bc32e84f074f68fbead51004f41))
+
+
+
 ## [0.1.6](https://github.com/gerardbalaoro/segment-inspector/compare/v0.1.5...v0.1.6) (2023-11-28)
 
 

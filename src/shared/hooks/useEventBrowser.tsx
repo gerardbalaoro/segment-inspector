@@ -1,9 +1,12 @@
 import dayjs from 'dayjs';
 import { sort } from 'radash';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { devtools } from 'webextension-polyfill';
 import { SegmentEvent, SegmentEventData } from '../segment';
+import storage from '../storages/event';
 
 export default function useEventBrowser() {
+  const key = devtools.inspectedWindow.tabId.toString();
   const [events, setEvents] = useState<SegmentEventData[]>([]);
   const [messageId, setMessageId] = useState<string | null>(null);
 
@@ -26,6 +29,18 @@ export default function useEventBrowser() {
       return events;
     });
   };
+
+  useEffect(() => {
+    storage.get(key).then(events => {
+      setEvents(events);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    storage.set(key, events);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [events]);
 
   return {
     list: sort(events, e => dayjs(e.timestamp).unix(), true),

@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import EventList from './components/EventList';
 
 import { When } from 'react-if';
+import ActionBar from './components/ActionBar';
 import EventView from './components/EventView';
 
 import { SegmentEvent } from '@root/src/shared/segment';
@@ -15,9 +16,7 @@ import { cn } from '@src/shared/utils/ui';
 import { minimatch } from 'minimatch';
 import { onMessage } from 'webext-bridge/devtools';
 import browser from 'webextension-polyfill';
-
 import { z } from 'zod';
-import ActionBar from './components/ActionBar';
 
 const Panel: React.FC = () => {
   const id = browser.devtools.inspectedWindow.tabId;

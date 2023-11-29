@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 export enum StorageType {
   Local = 'local',
   Sync = 'sync',
@@ -20,10 +22,10 @@ export function createStorage<D>(key: string, fallback: D, config?: { storageTyp
   const storageType = config?.storageType ?? StorageType.Local;
 
   const _getDataFromStorage = async (): Promise<D> => {
-    if (chrome.storage[storageType] === undefined) {
+    if (browser.storage[storageType] === undefined) {
       throw new Error(`Check your storage permission into manifest.json: ${storageType} is not defined`);
     }
-    const value = await chrome.storage[storageType].get([key]);
+    const value = await browser.storage[storageType].get([key]);
     return value[key] ?? fallback;
   };
 

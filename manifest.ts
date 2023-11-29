@@ -9,7 +9,7 @@ const manifest: Manifest = {
   name: 'Segment Inspector',
   version: packageJson.version,
   description: packageJson.description,
-  permissions: ['activeTab', 'tabs', 'webRequest', 'clipboardWrite', 'clipboardRead'],
+  permissions: ['storage', 'activeTab', 'tabs', 'webRequest', 'clipboardWrite', 'clipboardRead'],
   host_permissions: ['*://*/*'],
   action: {
     default_icon: 'icon-48.png',

@@ -47,7 +47,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-if": "^4.1.5",
-    "tailwind-merge": "^2.0.0",
+    "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
     "webext-bridge": "^6.0.1",
     "webextension-polyfill": "0.10.0",

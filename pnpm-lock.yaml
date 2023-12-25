@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@fontsource/inter':
     specifier: ^5.0.15
@@ -56,8 +60,8 @@ dependencies:
     specifier: ^4.1.5
     version: 4.1.5(react@18.2.0)
   tailwind-merge:
-    specifier: ^2.0.0
-    version: 2.0.0
+    specifier: ^2.2.0
+    version: 2.2.0
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.3.5)
@@ -8421,8 +8425,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /tailwind-merge@2.0.0:
-    resolution: {integrity: sha512-WO8qghn9yhsldLSg80au+3/gY9E4hFxIvQ3qOmlpXnqpDKoMruKfi/56BbbMg6fHTQJ9QD3cc79PoWqlaQE4rw==}
+  /tailwind-merge@2.2.0:
+    resolution: {integrity: sha512-SqqhhaL0T06SW59+JVNfAqKdqLs0497esifRrZ7jOaefP3o64fdFNDMrAQWZFMxTLJPiHVjRLUywT8uFz1xNWQ==}
     dependencies:
       '@babel/runtime': 7.23.5
     dev: false
@@ -9179,7 +9183,7 @@ packages:
   /webext-buildtools-utils@1.0.15:
     resolution: {integrity: sha512-rb+1sbhufaN3vcpoVJdukQtgnpKS+A/2oP40yechzflb1Yt2SMVo/vj+wY5mbyZ5by2IQJ79RkQ3GmC5h0GokQ==}
     dependencies:
-      buffer-indexof-polyfill: github.com/cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de
+      buffer-indexof-polyfill: git/github.com+cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de
       fs-extra: 10.1.0
       lodash: 4.17.21
       sanitize-filename: 1.6.3
@@ -9490,13 +9494,9 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
 
-  github.com/cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de:
-    resolution: {tarball: https://codeload.github.com/cardinalby/buffer-indexof-polyfill/tar.gz/dd4d89a6b2b877d7f129b339dfd7c014f10435de}
+  git/github.com+cardinalby/buffer-indexof-polyfill/dd4d89a6b2b877d7f129b339dfd7c014f10435de:
+    resolution: {commit: dd4d89a6b2b877d7f129b339dfd7c014f10435de, repo: git@github.com:cardinalby/buffer-indexof-polyfill.git, type: git}
     name: buffer-indexof-polyfill
     version: 1.0.1
     engines: {node: '>=0.10'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
